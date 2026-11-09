@@ -1,0 +1,19 @@
+﻿@model BE4_LUUTHANHQUAN.Models.Order
+@{
+    ViewBag.Title = "Đặt hàng thành công";
+}
+<div class="container py-5">
+    <div class="card border-0 shadow-sm mx-auto" style="max-width:700px;">
+        <div class="card-body text-center p-4 p-md-5">
+            <div class="display-4 text-success mb-3">✓</div>
+            <h2 class="text-success fw-bold">Đặt hàng thành công!</h2>
+            <p class="text-muted">Cảm ơn bạn đã mua sắm tại BE4.</p>
+            <hr />
+            <p>Mã đơn hàng: <strong>#@Model.OrderID</strong></p>
+            <p>Ngày đặt: @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+            <p>Tổng tiền: <strong class="text-danger">@Model.TotalAmount.ToString("N0") đ</strong></p>
+            <p>Địa chỉ giao hàng: @Model.AddressDelivery</p>
+            @Html.ActionLink("Tiếp tục mua sắm", "Index", "Home", null, new { @class = "btn btn-primary mt-3" })
+        </div>
+    </div>
+</div>

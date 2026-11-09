@@ -1,0 +1,36 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.LoginVM
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+<div class="container py-4">
+    <div class="card border-0 shadow-sm mx-auto" style="max-width:480px;border-radius:14px;">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="text-center fw-bold mb-2">Đăng nhập</h2>
+            <p class="text-center text-muted mb-4">Đăng nhập để tiếp tục mua sắm tại BE4</p>
+            @if (TempData["Message"] != null) {
+                <div class="alert alert-success">@TempData["Message"]</div>
+            }
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ReturnUrl)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Username, "Tên đăng nhập", new { @class = "form-label fw-semibold" })
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control form-control-lg", autocomplete = "username", placeholder = "Nhập tên đăng nhập" })
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger small" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Password, "Mật khẩu", new { @class = "form-label fw-semibold" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-lg", autocomplete = "current-password", placeholder = "Nhập mật khẩu" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                </div>
+                <div class="form-check mb-4">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                    @Html.LabelFor(m => m.RememberMe, "Ghi nhớ đăng nhập", new { @class = "form-check-label" })
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Đăng nhập</button>
+            }
+            <p class="text-center mt-4 mb-0">Chưa có tài khoản? @Html.ActionLink("Đăng ký ngay", "Register", "Account")</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.ProductSearchVM
+
+@{
+    ViewBag.Title = "Search Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search</title>
+    <style>
+        .search-container, .order-container {
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Form tìm kiếm -->
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    {
+        <div class="form-group search-container">
+            @Html.TextBoxFor(m => m.SearchTerm, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập tên, mô tả hoặc chủng loại sản phẩm"
+            })
+
+            @*bổ sung thêm trường tìm kiếm theo khoảng giá*@
+            @Html.TextBoxFor(m => m.MinPrice, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập giá tối thiểu",
+                type = "number"
+            })
+
+            @Html.TextBoxFor(m => m.MaxPrice, new
+            {
+                @class = "form-control",
+                placeholder = "Nhập giá tối đa",
+                type = "number"
+            })
+
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </div>
+        <!-- Tùy chọn sắp xếp -->
+        <div class="form-group order-container">
+            Sắp xếp theo:
+            @Html.ActionLink("Tên tăng dần", "Index",
+                    new { sortOrder = "name_asc", searchTerm = Model.SearchTerm })
+            |
+            @Html.ActionLink("Tên giảm dần", "Index",
+                    new { sortOrder = "name_desc", searchTerm = Model.SearchTerm })
+            |
+            @Html.ActionLink("Giá tăng dần", "Index",
+                    new { sortOrder = "price_asc", searchTerm = Model.SearchTerm })
+            |
+            @Html.ActionLink("Giá giảm dần", "Index",
+                    new { sortOrder = "price_desc", searchTerm = Model.SearchTerm })
+        </div>
+            }
+
+    @* Form kết quả tìm kiếm *@
+    @Html.Partial("pvlist", Model)
+
+</body>
+</html>

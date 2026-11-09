@@ -1,0 +1,28 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.ProductDetailsVM
+@using PagedList.Mvc
+
+<link rel="stylesheet" type="text/css" href="~/Content/MyStyle/CustomerHome.css" />
+
+<!-- Hiển thị danh sách sản phẩm -->
+@if (Model.RelatedProducts != null && Model.RelatedProducts.Any())
+{
+    <section class="container-fluid featureProd">
+        <h4 style="font-weight:bold;">Sản phẩm tương tự</h4>
+        <ul class="feature-container">
+            @foreach (var product in Model.RelatedProducts)
+            {
+                <li class="fproduct-item">
+                    <div>
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">
+                            <img src="@Html.DisplayFor(modelItem => product.ProductImage)" />
+                        </a>
+                    </div>
+                    <div>
+                        <h5>@Html.DisplayFor(modelItem => product.ProductName)</h5>
+                        <p class="prodSale">@Html.DisplayFor(modelItem => product.ProductPrice)</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
+}

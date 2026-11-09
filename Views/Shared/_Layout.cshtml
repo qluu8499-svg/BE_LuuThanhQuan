@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - BE4 | Cửa hàng trực tuyến</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            @Html.ActionLink("BE4 Store", "Index", "Home", null, new { @class = "navbar-brand fw-bold" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+                    aria-expanded="false" aria-label="Mở menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Sản phẩm", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Giỏ hàng", "Index", "Cart", null, new { @class = "nav-link" })</li>
+                </ul>
+                <div class="d-flex flex-wrap align-items-center gap-2 account-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <span class="text-light small">Xin chào, @User.Identity.Name</span>
+                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "m-0" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-outline-light btn-sm">Đăng xuất</button>
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Đăng nhập", "Login", "Account", null, new { @class = "btn btn-outline-light btn-sm" })
+                        @Html.ActionLink("Đăng ký", "Register", "Account", null, new { @class = "btn btn-warning btn-sm" })
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid page-content">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container d-flex flex-wrap justify-content-between gap-2">
+            <span>&copy; @DateTime.Now.Year - BE4 - Cửa hàng trực tuyến</span>
+            <span>Chúc bạn mua sắm vui vẻ!</span>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

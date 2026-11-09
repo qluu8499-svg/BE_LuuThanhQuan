@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BE4_LUUTHANHQUAN.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success" >DANH SÁCH MỤC SẢN PHẨM </h2>
+
+
+<table class="table bg-info col-10">
+    <tr>
+        <th class="bg-success col-5">
+            @**Html.DisplayNameFor(model => model.CategoryName)*@
+            TÊN DANH MỤC
+        </th>
+        <th class="bg-success col-5">
+            @**@
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Cập Nhật", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Chi Tiết ", "Details", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Thêm Mới Danh Mục", "Create", null, new { @class = "btn btn-primary " })
+</p>

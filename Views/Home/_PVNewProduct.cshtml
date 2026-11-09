@@ -1,0 +1,30 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.HomeProductVM
+@using PagedList.Mvc
+@if (Model.NewProducts != null && Model.NewProducts.Any())
+{
+    <section class="product-section container-fluid">
+        <h2 class="section-title">Sản phẩm mới</h2>
+        <div class="product-grid">
+            @foreach (var product in Model.NewProducts)
+            {
+                <article class="product-card">
+                    <a class="product-image" href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">
+                        <img src="@Url.Content(product.ProductImage ?? "~/Content/images/no-image.png")" alt="@product.ProductName" loading="lazy" />
+                    </a>
+                    <div class="product-info">
+                        <div class="product-price">@product.ProductPrice.ToString("N0") đ</div>
+                        <a class="product-name" href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">@product.ProductName</a>
+                        <div class="product-meta">Đã bán: @(product.OrderDetails == null ? 0 : product.OrderDetails.Count)</div>
+                    </div>
+                </article>
+            }
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model.NewProducts, page => Url.Action("Index", new { page, searchTerm = Model.SearchTerm }))
+        </div>
+    </section>
+}
+else
+{
+    <div class="container"><p class="alert alert-info">Không tìm thấy sản phẩm phù hợp.</p></div>
+}

@@ -1,0 +1,23 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.HomeProductVM
+@if (Model.FeaturedProducts != null && Model.FeaturedProducts.Any())
+{
+    <section class="product-section container-fluid">
+        <h2 class="section-title">Sản phẩm nổi bật</h2>
+        <div class="product-strip">
+            @foreach (var product in Model.FeaturedProducts)
+            {
+                <article class="product-card">
+                    <a class="product-image" href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">
+                        <img src="@Url.Content(product.ProductImage ?? "~/Content/images/no-image.png")" alt="@product.ProductName" loading="lazy" />
+                    </a>
+                    <div class="product-info">
+                        <div class="product-price">@product.ProductPrice.ToString("N0") đ</div>
+                        <a class="product-name" href="@Url.Action("ProductDetails", "Home", new { id = product.ProductID })">@product.ProductName</a>
+                        <div class="product-meta">@(product.Category == null ? "" : product.Category.CategoryName)</div>
+                        <div class="product-meta">Đã bán: @(product.OrderDetails == null ? 0 : product.OrderDetails.Count)</div>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
+}

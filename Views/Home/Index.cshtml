@@ -1,0 +1,33 @@
+﻿@model BE4_LUUTHANHQUAN.Models.ViewModel.HomeProductVM
+@{
+    ViewBag.Title = "Trang chủ";
+}
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/MyStyle/CustomerHome.css")" />
+}
+<section class="home-hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <span class="hero-eyebrow">BE4 ONLINE STORE</span>
+            <h1>Chào mừng đến với BE4</h1>
+            <p>Mua sắm trực tuyến với hàng ngàn sản phẩm đa dạng và chất lượng</p>
+            <a href="#san-pham-moi" class="btn btn-warning btn-lg fw-semibold">Bắt đầu mua sắm</a>
+        </div>
+    </div>
+</section>
+
+<section class="search-section container">
+    <h2>Tìm kiếm sản phẩm</h2>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "home-search" }))
+    {
+        <input type="search" name="searchTerm" value="@Model.SearchTerm"
+               class="form-control" placeholder="Nhập tên, mô tả hoặc chủng loại sản phẩm"
+               aria-label="Tìm kiếm sản phẩm" />
+        <button type="submit" class="btn btn-danger">Tìm kiếm</button>
+    }
+</section>
+
+@Html.Partial("_PVFeatureProduct", Model)
+<div id="san-pham-moi">
+    @Html.Partial("_PVNewProduct", Model)
+</div>

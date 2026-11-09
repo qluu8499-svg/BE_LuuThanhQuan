@@ -1,0 +1,29 @@
+﻿@model BE4_LUUTHANHQUAN.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success">THÔNG TIN CHI TIẾT CỦA DANH MỤC</h2>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Tên danh mục</div>
+        <div class="col-md-10">
+            @* Hiển thị giá trị của CategoryName trong khung bo tròn giống các trang khác *@
+            <div class="form-control" style="background-color: #eee; cursor: not-allowed; display: inline-block; width: auto; min-width: 250px;">
+                @Html.DisplayFor(model => model.CategoryName)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Cập Nhật", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
